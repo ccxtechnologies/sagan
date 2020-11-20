@@ -38,11 +38,11 @@
 
 #include "parsers/json.h"
 
-struct _SaganCounters *counters;
-struct _SaganConfig *config;
-struct _SaganDebug *debug;
+extern struct _SaganCounters *counters;
+extern struct _SaganConfig *config;
+extern struct _SaganDebug *debug;
 
-struct _Syslog_JSON_Map *Syslog_JSON_Map;
+extern struct _Syslog_JSON_Map *Syslog_JSON_Map;
 
 void SyslogInput_JSON( char *syslog_string, struct _Sagan_Proc_Syslog *SaganProcSyslog_LOCAL )
 {
@@ -59,13 +59,6 @@ void SyslogInput_JSON( char *syslog_string, struct _Sagan_Proc_Syslog *SaganProc
     memcpy(SaganProcSyslog_LOCAL->syslog_priority, "UNDEFINED\0", 10);
     memcpy(SaganProcSyslog_LOCAL->syslog_facility, "UNDEFINED\0", 10);
     memcpy(SaganProcSyslog_LOCAL->syslog_host, "0.0.0.0\0", 8);
-
-    SaganProcSyslog_LOCAL->src_ip[0] = '\0';
-    SaganProcSyslog_LOCAL->dst_ip[0] = '\0';
-
-
-    SaganProcSyslog_LOCAL->md5[0] = '\0';
-    SaganProcSyslog_LOCAL->event_id[0] = '\0';
 
     /* Search through all key/values looking for embedded JSON */
 
@@ -136,6 +129,11 @@ void SyslogInput_JSON( char *syslog_string, struct _Sagan_Proc_Syslog *SaganProc
             if ( Syslog_JSON_Map->syslog_map_program[0] != '\0' && !strcmp(Syslog_JSON_Map->syslog_map_program, SaganProcSyslog_LOCAL->json_key[i] ) )
                 {
                     strlcpy(SaganProcSyslog_LOCAL->syslog_program, SaganProcSyslog_LOCAL->json_value[i], sizeof(SaganProcSyslog_LOCAL->syslog_program));
+                }
+
+            if ( Syslog_JSON_Map->username[0] != '\0' && !strcmp(Syslog_JSON_Map->username, SaganProcSyslog_LOCAL->json_key[i] ) )
+                {
+                    strlcpy(SaganProcSyslog_LOCAL->username, SaganProcSyslog_LOCAL->json_value[i], sizeof(SaganProcSyslog_LOCAL->username));
                 }
 
             if ( Syslog_JSON_Map->src_ip[0] != '\0' && !strcmp(Syslog_JSON_Map->src_ip, SaganProcSyslog_LOCAL->json_key[i] ) )
