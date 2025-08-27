@@ -2427,10 +2427,6 @@ void Load_Rules( const char *ruleset )
 
                                     rc = pcre_fullinfo(rulestruct[counters->rulecount].json_re_pcre[json_pcre_count], rulestruct[counters->rulecount].json_pcre_extra[json_pcre_count], PCRE_INFO_JIT, &jit);
 
-                                    if (rc != 0 || jit != 1)
-                                        {
-                                            Sagan_Log(WARN, "[%s, line %d] PCRE JIT does not support regexp in %s at line %d. Continuing without PCRE JIT enabled for this rule.", __FILE__, __LINE__, ruleset_fullname, linecount);
-                                        }
                                 }
 
 #endif
@@ -3124,10 +3120,6 @@ void Load_Rules( const char *ruleset )
 
                                     rc = pcre_fullinfo(rulestruct[counters->rulecount].re_pcre[pcre_count], rulestruct[counters->rulecount].pcre_extra[pcre_count], PCRE_INFO_JIT, &jit);
 
-                                    if (rc != 0 || jit != 1)
-                                        {
-                                            Sagan_Log(WARN, "[%s, line %d] PCRE JIT does not support regexp in %s at line %d (pcre: \"%s\"). Continuing without PCRE JIT enabled for this rule.", __FILE__, __LINE__, ruleset_fullname, linecount, pcrerule);
-                                        }
                                 }
 
 #endif
