@@ -1186,22 +1186,23 @@ bool Starts_With(const char *str, const char *prefix)
 /* Strip characters from a string */
 /**********************************/
 
-void Strip_Chars(const char *string, const char *chars, char *str)
-{
+void Strip_Chars(const char* string, const char *chars, char *str){
 
     uint_fast32_t i = 0;
-
-    for ( i = 0; i<strlen(string); i++)
-        {
-
-            if (!strchr(chars, *string))
-                {
-                    str[i] = string[i];
-                    str[i+1] = '\0';
-                }
-
+    uint_fast32_t offset = 0;
+    
+    for( i = 0; i < strlen(string); i++){
+        if (!strchr(chars, *(string+i))){
+            // the ith char is not in chars, so we copy it
+            memcpy(str,string+offset, strlen(string)-offset);
+            str[strlen(str)] = '\0';
+            break;
         }
-
+        else{    
+            offset++;
+        }
+    } 
+    
 }
 
 /***************************************************
