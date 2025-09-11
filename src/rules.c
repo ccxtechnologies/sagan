@@ -286,8 +286,6 @@ void Load_Rules( const char *ruleset )
 
             memset(netstr, 0, sizeof(netstr));
             memset(rulestr, 0, sizeof(rulestr));
-            memset(tok_help, 0, 64);
-            memset(tok_help2, 0, 64);
 
             int f1=0; /* Need for flow_direction, must reset every rule, not every group */
             int f2=0; /* Need for flow_direction, must reset every rule, not every group */
