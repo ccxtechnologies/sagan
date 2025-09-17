@@ -1186,7 +1186,7 @@ bool Starts_With(const char *str, const char *prefix)
 /* Strip characters from the beginning of a string */
 /***************************************************/
 
-void Strip_Chars(const char* string, const char *chars, char *str)
+void Strip_Chars(const char *string, const char *chars, char *str)
 {
 
     uint_fast32_t i = 0;
