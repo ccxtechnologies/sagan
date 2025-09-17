@@ -1182,29 +1182,24 @@ bool Starts_With(const char *str, const char *prefix)
     return lenstr < lenpre ? false : strncmp(prefix, str, lenpre) == 0;
 }
 
-/**********************************/
-/* Strip characters from a string */
-/**********************************/
+/***************************************************/
+/* Strip characters from the beginning of a string */
+/***************************************************/
 
 void Strip_Chars(const char* string, const char *chars, char *str)
 {
 
     uint_fast32_t i = 0;
-    uint_fast32_t offset = 0;
+    uint_fast32_t out_index = 0;
 
     for( i = 0; i < strlen(string); i++)
     {
-        if (!strchr(chars, *(string+i)))
-        {
-            // the ith char is not in chars, so we copy it
-            memcpy(str,string+offset, strlen(string)-offset);
-            str[strlen(str)] = '\0';
-            break;
-        }
-        else
-        {
-            offset++;
-        }
+       if (strchr(chars, string[i]) == NULL) 
+       {
+           str[out_index] = string[i];
+           str[out_index+1]='\0';
+           out_index++;
+       }       
     }
 
 }
