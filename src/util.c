@@ -1188,25 +1188,25 @@ bool Starts_With(const char *str, const char *prefix)
 
 void Strip_Chars(const char *string, const char *chars, char *str)
 {
-
-    uint_fast32_t i = 0;
-    uint_fast32_t index = 0;
-    uint_fast32_t found_index = 0;
-
-    for( i = 0; i < strlen(string); i++)
+    if (string == NULL || chars == NULL || str == NULL) 
     {
-       if (strchr(chars, string[i]) == NULL && !(found_index)) 
-       {
-           found_index = 1;
-       }
-       if (found_index)
-       {   
-           str[index] = string[i];
-           str[index+1] = '\0';
-           index++;  
-       }
- 
+        
+        if (str != NULL) 
+            str[0] = '\0';
+        return;
+        
     }
+    
+    const char* start = string; 
+    
+    while (*start != '\0' && strchr(chars, *start) != NULL)
+    {
+        start++;
+    }
+
+    uint_fast32_t length = strlen(start);
+    strcpy(str, start);
+    str[length] = '\0';
 
 }
 
