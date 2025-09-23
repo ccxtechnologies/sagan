@@ -1204,9 +1204,9 @@ void Strip_Chars(const char *string, const char *chars, char *str)
         start++;
     }
 
-    uint_fast32_t length = strlen(start);
-    strcpy(str, start);
-    str[length] = '\0';
+    uint_fast32_t bytes_to_copy = strlen(start);
+    strncpy(str, start, bytes_to_copy);
+    str[bytes_to_copy] = '\0';
 
 }
 
