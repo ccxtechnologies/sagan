@@ -1182,25 +1182,31 @@ bool Starts_With(const char *str, const char *prefix)
     return lenstr < lenpre ? false : strncmp(prefix, str, lenpre) == 0;
 }
 
-/**********************************/
-/* Strip characters from a string */
-/**********************************/
+/***************************************************/
+/* Strip characters from the beginning of a string */
+/***************************************************/
 
 void Strip_Chars(const char *string, const char *chars, char *str)
 {
+    if (string == NULL || chars == NULL || str == NULL) 
+    {
+        
+        if (str != NULL) 
+            str[0] = '\0';
+        return;
+        
+    }
+    
+    const char* start = string; 
+    
+    while (*start != '\0' && strchr(chars, *start) != NULL)
+    {
+        start++;
+    }
 
-    uint_fast32_t i = 0;
-
-    for ( i = 0; i<strlen(string); i++)
-        {
-
-            if (!strchr(chars, *string))
-                {
-                    str[i] = string[i];
-                    str[i+1] = '\0';
-                }
-
-        }
+    uint_fast32_t bytes_to_copy = strlen(start);
+    strncpy(str, start, bytes_to_copy);
+    str[bytes_to_copy] = '\0';
 
 }
 
