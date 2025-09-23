@@ -287,6 +287,7 @@ void Load_Rules( const char *ruleset )
             memset(netstr, 0, sizeof(netstr));
             memset(rulestr, 0, sizeof(rulestr));
             memset(tok_help, 0, sizeof(tok_help));
+            //TODO: tok_help2 for ports should similarly be reset
 
             int f1=0; /* Need for flow_direction, must reset every rule, not every group */
             int f2=0; /* Need for flow_direction, must reset every rule, not every group */
